@@ -66,6 +66,9 @@ namespace WpfApplication3
         {
             try
             {
+                DiplayName.Text = "";
+                Carte.SetPositionByKeywords("Lyon, France");
+
                 string nominatim = Nominatim.Text;
                 string xmlString = request(nominatim);
                 XmlDocument xml = new XmlDocument();
@@ -75,7 +78,7 @@ namespace WpfApplication3
                 if (nodes.Count == 0)
                 {
                     Carte.SetPositionByKeywords("Lyon, France");
-                    MessageBox.Show("Pas de résultat");
+                    DiplayName.Text = "Pas de résultat";
                     return;
                 }
 
@@ -85,12 +88,14 @@ namespace WpfApplication3
 
                 string lat = node.Attributes["lat"].Value.ToString();
                 string lon = node.Attributes["lon"].Value.ToString();
+                string display_name = node.Attributes["display_name"].Value.ToString();
 
                 lat = lat.Replace(".", ",");
                 lon = lon.Replace(".", ",");
                 
                 double dlat = Convert.ToDouble(lat);
                 double dlon = Convert.ToDouble(lon);
+                DiplayName.Text = display_name;
 
                 //Center map on a point
                 Carte.Position = new PointLatLng(dlat, dlon);
@@ -105,6 +110,7 @@ namespace WpfApplication3
                     StrokeThickness = 3
                 };
 
+                Carte.Markers.Clear();
                 Carte.Markers.Add(marker);
                 
                 Carte.Zoom = 15;

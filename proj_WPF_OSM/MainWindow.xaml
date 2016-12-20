@@ -12,7 +12,8 @@
 
         <StackPanel Orientation="Vertical">
 
-            <StackPanel Orientation="Horizontal">
+            <StackPanel Orientation="Horizontal"
+                        HorizontalAlignment="Center">
 
                 <TextBox Name="Nominatim"
                          Margin="5" 
@@ -30,7 +31,12 @@
             Margin="5" 
             VerticalAlignment="Top" 
             Width="350"/>
-        
+
+            <TextBlock Margin="10" Name="DiplayName" 
+                       TextWrapping="Wrap"
+                       Width="350"
+                       HorizontalAlignment="Center" />
+            
         </StackPanel>
     </Grid>
 </Window>
